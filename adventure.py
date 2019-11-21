@@ -4,9 +4,18 @@ from random import randrange
 #                           end
 
 # VARIABLES DEFINITION      begin
-name = "notset"
-surname = "notset"
+# 0 = NO, 1 = YES
+
+# PLAYER
+name = ""
+surname = ""
 returning = 0
+
+# GAME LOGIC
+command = ""
+
+# GAME EVENTS
+acheck = 0
 #                           end
 
 
@@ -37,15 +46,52 @@ def welcome_message():
     if returning == 1:
         print("Welcome back " + name + " " + surname)
     else:
-        print("Welcome.")
+        print("Welcome to Mertix, this is your first time here.\n"
+              "All newcomers are required to perform an attitude check. Please input ACHECK when you're ready.\n"
+              "Please note that the attitude check is required as per contract. Default to this obligation will be "
+              "reported.\n")
         returning = 1
 
 
 def connecting():
-    print("Connecting, please wait...")
+    print("\n\n****\tConnecting, please wait...")
     time.sleep(randrange(4) + 1)
-    print("Connected. Receiving data...")
+    print("****\tConnected. Receiving data...\n\n")
     time.sleep(randrange(2) + 1)
+
+
+def disconnecting():
+    print("Disconnecting from Mertix. Goodbye.")
+    header_text()
+
+
+def last_info():
+    print("+== INFORMATIONS ==")
+    if acheck == 0:
+        print("| You still need to perform the mandatory attitude check.\n"
+              "| Please input ACHECK when you're ready\n"
+              "| Please note that the attitude check is required as per contract. Default to this obligation will be "
+              "reported.")
+    print("+==================")
+
+
+def command_input():
+    last_info()
+    print("+ Connected as: " + name + " " + surname)
+    str = input("| >\t\t")
+    print("+\n")
+    return str
+
+
+def command_parse(thiscommand):
+    connecting()
+
+    thiscommand = thiscommand.upper()
+    if thiscommand.__contains__("UOVO") | thiscommand.__contains__("EGG"):
+        print("Very funny.")
+    else:
+        print("Your input \"" + thiscommand + "\" was not recognized. This incident will be reported")
+        command_input()
 
 
 header_text()
@@ -53,3 +99,5 @@ connecting()
 start()
 connecting()
 welcome_message()
+command = command_input()
+command_parse(command)
