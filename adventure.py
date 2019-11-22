@@ -78,9 +78,9 @@ def last_info():
 def command_input():
     last_info()
     print("+ Connected as: " + name + " " + surname)
-    str = input("| >\t\t")
+    instr = input("| >\t\t")
     print("+\n")
-    return str
+    return instr
 
 
 def command_parse(thiscommand):
