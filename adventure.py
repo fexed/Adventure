@@ -4,6 +4,7 @@ from random import randrange
 #                           end
 
 # VARIABLES DEFINITION      begin
+# LEGEND
 # 0 = NO, 1 = YES
 
 # PLAYER
@@ -29,6 +30,24 @@ def header_text():
           "| #     # #       #    #     #     #   #   #  |\n"
           "| #     # ####### #     #    #    ### #     # |\n"
           "+====== Innovating truly and freely [] =======+\n")
+
+
+def help_text():
+    print("+==== MERTIX Subsystem [] Help dialog v1.1 ====+\n"
+          "| COMMAND LIST:                                |\n"
+          "|\tHELP                                        |\n"
+          "|\tShows this help dialog                      |\n"
+          "|                                              |\n"
+          "|\tOPEN <file>                                 |\n"
+          "|\tOpens the specified file                    |\n"
+          "|                                              |\n"
+          "|\tDELT <file>                                 |\n"
+          "|\tDeletes the specified file                  |\n"
+          "|                                              |\n"
+          "|\tCOPY <source> <destination>                 |\n"
+          "|\tCopies source to destination                |\n"
+          "|                                              |\n"
+          "+==============================================+")
 
 
 def start():
@@ -87,8 +106,11 @@ def command_parse(thiscommand):
     connecting()
 
     thiscommand = thiscommand.upper()
-    if thiscommand.__contains__("UOVO") | thiscommand.__contains__("EGG"):
+    if thiscommand.find("UOVO") != -1 | thiscommand.find("EGG") != -1:
         print("Very funny.")
+    elif thiscommand.find("HELP") != -1:
+        help_text()
+        command_input()
     else:
         print("Your input \"" + thiscommand + "\" was not recognized. This incident will be reported")
         command_input()
