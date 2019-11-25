@@ -151,11 +151,17 @@ def attitude_check():
         curious = 1
     print("|\n"
           "|\n"
-          "| Test endend. You result as a:")
+          "| Test ended. You result as a: ", end='', flush=True)
     if pragmatical == 1:
-        print(" pragmatical")
+        print("pragmatical", end='', flush=True)
     else:
-        print(" not pragmatical")
+        print("non pragmatical", end='', flush=True)
+    print(" and ", end='', flush=True)
+    if curious == 1:
+        print("curious", end='', flush=True)
+    else:
+        print("non curious", end='', flush=True)
+    print(" person.")
 
 
 def command_parse(thiscommand):
