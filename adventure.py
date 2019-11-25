@@ -111,6 +111,8 @@ def add_deviation():
 
 
 def attitude_check():
+    global acheck
+    acheck = 1
     connecting()
     print("+========= MERTIX ATTITUDE CHECK ========+\n"
           "| Please carefully follow the directions |\n"
@@ -162,18 +164,24 @@ def attitude_check():
     else:
         print("non curious", end='', flush=True)
     print(" person.")
+    if curious == 0 and pragmatical == 0:
+        print("| As such, you are not qualified for the position.\n  Goodbye")
+        exit(0)
 
 
 def command_parse(thiscommand):
     connecting()
 
     thiscommand = thiscommand.upper()
-    if thiscommand.find("UOVO") != -1 | thiscommand.find("EGG") != -1:
+    if thiscommand.find("UOVO") != -1 or thiscommand.find("EGG") != -1:
         print("Very funny.")
     elif thiscommand.find("HELP") != -1:
         help_text()
     elif thiscommand.find("ACHK") != -1:
-        attitude_check()
+        if acheck == 0:
+            attitude_check()
+        else:
+            print("You already performed the mandatory attitude check.")
     else:
         print("Your input \"" + thiscommand + "\" was not recognized. This incident will be reported")
 
