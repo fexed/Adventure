@@ -20,6 +20,7 @@ def waitForKey(window):
 
 def clearScreen(window):
     window.clear()
+    imgWindowBuild(window)
     txtWindowBuild(window)
     charWindow(window)
 
@@ -35,13 +36,30 @@ def txtInput(window):
     txt = window.getstr(14, winWidth+3)
     return txt
 
+def imgWindowBuild(window):
+    window.addstr(1, 1, (" " * winWidth+15) + "|")
+    window.addstr(2, 1, (" " * winWidth+15) + "|")
+    window.addstr(3, 1, (" " * winWidth+15) + "|")
+    window.addstr(4, 1, (" " * winWidth+15) + "|")
+    window.addstr(5, 1, (" " * winWidth+15) + "|")
+    window.addstr(6, 1, (" " * winWidth+15) + "|")
+    window.addstr(7, 1, (" " * winWidth+15) + "|")
+    window.addstr(8, 1, (" " * winWidth+15) + "|")
+    window.addstr(9, 1, (" " * winWidth+15) + "|")
+    window.addstr(10, 1, (" " * winWidth+15) + "|")
+    window.addstr(11, 1, (" " * winWidth+15) + "|")
+    window.addstr(12, 1, (" " * winWidth+15) + "|")
+    window.addstr(13, 1, (" " * winWidth+15) + "|")
+    window.addstr(14, 1, (" " * winWidth+15) + "|")
+    
+
 def txtWindowBuild(window):
-	window.addstr(15, 1, "+" + ("-" * winWidth) + "+")
-	window.addstr(16, 1, "|" + (" " * winWidth) + "|")
-	window.addstr(17, 1, "|" + (" " * winWidth) + "|")
-	window.addstr(18, 1, "|" + (" " * winWidth) + "|")
-	window.addstr(19, 1, "+" + ("-" * winWidth) + "+")
-	window.refresh()
+    window.addstr(15, 1, "+" + ("-" * winWidth) + "+")
+    window.addstr(16, 1, "|" + (" " * winWidth) + "|")
+    window.addstr(17, 1, "|" + (" " * winWidth) + "|")
+    window.addstr(18, 1, "|" + (" " * winWidth) + "|")
+    window.addstr(19, 1, "+" + ("-" * winWidth) + "+")
+    window.refresh()
 
 def wrap(text):
     maxLen = winWidth # 50
@@ -86,6 +104,7 @@ def charWindow(window):
 
 def main(window):
     global name, gold, level
+    clearScreen(window)
     txtShow(window, "Hello adventurer! This is a very small adventure, an experiment if you may... you will explore a very simple dungeon and try to retrieve some gold hidden in it!")
     txtShow(window, "But first...")
     txtShow(window, "What's your name?")
@@ -94,6 +113,11 @@ def main(window):
     clearScreen(window)
     txtShow(window, "Very nice " + name + "!")
     txtShow(window, "We may now begin...")
+    txtShow(window, "You find yourself at the entrance of a very ancient cript.")
+    # show door image
+    txtShow(window, "The wooden door in front of you has an iron handle on the right side, and bears an inscription. You can barely read it, but it says something like...")
+    # show sign image
+    txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
 
 window = curses.initscr()
 curses.halfdelay(5)
