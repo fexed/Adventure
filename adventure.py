@@ -127,6 +127,8 @@ def main(window):
     string = txtInput(window)
     if string == "enter":
         txtShow(window, "You open the door. It's heavy and the hinges are old and rusty.")
+        drawImage(window, open("entrance", "r").read().split("\n"))
+        txtShow(window, "")
     else:
         txtShow(window, "Maybe you're not ready for the adventure after all...")
 
