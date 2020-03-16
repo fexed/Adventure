@@ -4,27 +4,6 @@ import curses
 # SYSTEM
 winWidth = 60
 
-# GRAPHICS
-door = ["",
-        (" " * 27) + "██████████████",
-        (" " * 25) + "██" + (" " * 14) + "██",
-        (" " * 24) + "█" + (" " * 5) + ("_" * 5) + (" " * 8) + "█",
-        (" " * 23) + "█" + (" " * 5) + "|" + (" " * 5) + "|" + (" " * 8) + "█",
-        (" " * 23) + "█" + (" " * 5) + "|" + ("_" * 5) + "|" + (" " * 8) + "█",
-        (" " * 23) + "█" + (" " * 20) + "█",
-        (" " * 23) + "█" + (" " * 20) + "█",
-        (" " * 23) + "█" + (" " * 20) + "█",
-        (" " * 23) + "█" + (" " * 16) + "██  █",
-        (" " * 23) + "█" + (" " * 16) + "██  █",
-        (" " * 23) + "█" + (" " * 20) + "█",
-        (" " * 23) + "█" + (" " * 20) + "█",
-        (" " * 23) + "█" + (" " * 20) + "█",
-        ("_" * 23) + "█" + ("_" * 20) + "█" + ("_" * 33)]
-
-empty = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-
-sign = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
-
 # CHARACTER
 name = ""
 level = 0
@@ -141,7 +120,9 @@ def main(window):
     txtShow(window, "We may now begin...")
     txtShow(window, "") #GAME START
     txtShow(window, "You find yourself at the entrance of a very ancient cript.")
-    drawImage(window, door)
+    doorfile = open("door", "r")
+    doorimg = doorfile.read()
+    drawImage(window, doorimg.split("\n"))
     txtShow(window, "The wooden door in front of you has an iron handle on the right side, and bears an inscription. You can barely read it, but it says something like...")
     txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
     txtShow(window, "What will you do? [enter/leave]")
