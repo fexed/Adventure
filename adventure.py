@@ -52,9 +52,10 @@ def nameInput(window):
     return txt.decode("utf-8")
 
 def txtInput(window):
+    window.addstr(20, 1, (" " * 69))
     curses.echo()
     curses.nocbreak()
-    txt = window.getstr(22, 1)
+    txt = window.getstr(20, 1)
     return txt.decode("utf-8")
 
 def imgWindowBuild(window):
@@ -145,9 +146,7 @@ def main(window):
     txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
     txtShow(window, "What will you do? [enter/leave]")
     string = txtInput(window)
-    if string == "leave":
-        txtShow(window, "Maybe you're not ready for the adventure after all...")
-    elif string == "enter":
+    if string == "enter":
         txtShow(window, "You open the door. It's heavy and the hinges are old and rusty.")
     else:
         txtShow(window, "Maybe you're not ready for the adventure after all...")
