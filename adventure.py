@@ -4,6 +4,23 @@ import curses
 # SYSTEM
 winWidth = 60
 
+# GRAPHICS
+door = ["",
+        (" " * 27) + "██████████████",
+        (" " * 25) + "██" + (" " * 14) + "██",
+        (" " * 24) + "█" + (" " * 18) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 16) + "██  █",
+        (" " * 23) + "█" + (" " * 16) + "██  █",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        (" " * 23) + "█" + (" " * 20) + "█",
+        ("_" * 23) + "█" + ("_" * 20) + "█" + ("_" * 33)]
+
 # CHARACTER
 name = ""
 level = 0
@@ -37,21 +54,26 @@ def txtInput(window):
     return txt
 
 def imgWindowBuild(window):
-    window.addstr(1, 1, (" " * winWidth+15) + "|")
-    window.addstr(2, 1, (" " * winWidth+15) + "|")
-    window.addstr(3, 1, (" " * winWidth+15) + "|")
-    window.addstr(4, 1, (" " * winWidth+15) + "|")
-    window.addstr(5, 1, (" " * winWidth+15) + "|")
-    window.addstr(6, 1, (" " * winWidth+15) + "|")
-    window.addstr(7, 1, (" " * winWidth+15) + "|")
-    window.addstr(8, 1, (" " * winWidth+15) + "|")
-    window.addstr(9, 1, (" " * winWidth+15) + "|")
-    window.addstr(10, 1, (" " * winWidth+15) + "|")
-    window.addstr(11, 1, (" " * winWidth+15) + "|")
-    window.addstr(12, 1, (" " * winWidth+15) + "|")
-    window.addstr(13, 1, (" " * winWidth+15) + "|")
-    window.addstr(14, 1, (" " * winWidth+15) + "|")
-    
+    window.addstr(0, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(1, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(2, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(3, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(4, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(5, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(6, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(7, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(8, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(9, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(10, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(11, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(12, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(13, 1, (" " * (winWidth+18)) + "|")
+    window.addstr(14, 1, (" " * (winWidth+18)) + "|")
+
+def drawImage(window, image):
+    imgWindowBuild(window)
+    for i in range(15):
+        window.addstr(i, 1, image[i])
 
 def txtWindowBuild(window):
     window.addstr(15, 1, "+" + ("-" * winWidth) + "+")
@@ -112,9 +134,10 @@ def main(window):
     name = inputb.decode("utf-8")
     clearScreen(window)
     txtShow(window, "Very nice " + name + "!")
-    txtShow(window, "We may now begin...")
+    txtShow(window, "We may now begin...")    
+    txtShow(window, "")
     txtShow(window, "You find yourself at the entrance of a very ancient cript.")
-    # show door image
+    drawImage(window, door)
     txtShow(window, "The wooden door in front of you has an iron handle on the right side, and bears an inscription. You can barely read it, but it says something like...")
     # show sign image
     txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
@@ -122,7 +145,6 @@ def main(window):
 window = curses.initscr()
 curses.halfdelay(5)
 curses.noecho()
-curses.wrapper(txtWindowBuild)
-curses.wrapper(charWindow)
+curses.wrapper(clearScreen)
 char = curses.wrapper(waitForKey)
 curses.wrapper(main)
