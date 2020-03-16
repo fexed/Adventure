@@ -49,13 +49,13 @@ def nameInput(window):
     curses.echo()
     curses.nocbreak()
     txt = window.getstr(16, winWidth+4)
-    return txt
+    return txt.decode("utf-8")
 
 def txtInput(window):
     curses.echo()
     curses.nocbreak()
-    txt = window.getstr(22, winWidth+3)
-    return txt
+    txt = window.getstr(22, 1)
+    return txt.decode("utf-8")
 
 def imgWindowBuild(window):
     window.addstr(0, 1, (" " * (winWidth+18)) + "|")
@@ -134,8 +134,7 @@ def main(window):
     txtShow(window, "Hello adventurer! This is a very small adventure, an experiment if you may... you will explore a very simple dungeon and try to retrieve some gold hidden in it!")
     txtShow(window, "But first...")
     txtShow(window, "What's your name?")
-    inputb = nameInput(window)
-    name = inputb.decode("utf-8")
+    name = nameInput(window)
     clearScreen(window)
     txtShow(window, "Very nice " + name + "!")
     txtShow(window, "We may now begin...")
@@ -145,14 +144,13 @@ def main(window):
     txtShow(window, "The wooden door in front of you has an iron handle on the right side, and bears an inscription. You can barely read it, but it says something like...")
     txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
     txtShow(window, "What will you do? [enter/leave]")
-    inp = txtInput(window)
-    string = inp.decode("utf-8")
+    string = txtInput(window)
     if string == "leave":
-        txtShow(window, string + " Maybe you're not ready for the adventure after all...")
+        txtShow(window, "Maybe you're not ready for the adventure after all...")
     elif string == "enter":
-        txtShow(window, string + " You open the door. It's heavy and the hinges are old and rusty.")
+        txtShow(window, "You open the door. It's heavy and the hinges are old and rusty.")
     else:
-        txtShow(window, string + " Maybe you're not ready for the adventure after all...")
+        txtShow(window, "Maybe you're not ready for the adventure after all...")
 
 window = curses.initscr()
 curses.halfdelay(5)
