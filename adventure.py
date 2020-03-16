@@ -9,6 +9,9 @@ name = ""
 level = 0
 gold = 3
 
+def printLog(window, text):
+    window.addstr(22, 1, text)
+
 def waitForKey(window):
 	curses.noecho()
 	curses.cbreak()
@@ -29,14 +32,29 @@ def txtWindowBuild(window):
 	window.refresh()
 
 def wrap(text):
-	chunks, chunkSize = len(text), winWidth
-	return [ text[i:i+chunkSize] for i in range(0, chunks, chunkSize) ]
+    maxLen = winWidth # 50
+    lines = []
+    strings = text.split()
+    n = len(strings)
+    curstring = ""
+    for string in strings:
+        if curstring == "":
+            curstring = string
+        elif len(curstring) + len(string) + 1 < maxLen:
+            curstring += " "
+            curstring += string
+        else:
+            lines.append(curstring)
+            curstring = string
+    lines.append(curstring)
+    return lines
+        
 
 def txtShow(window, text):
 	texts = wrap(text)
 	i = 0
-	for str in texts:
-		window.addstr(16 + i, 2, str)
+	for string in texts:
+		window.addstr(16 + i, 2, string)
 		i += 1
 	waitForKey(window)
 
