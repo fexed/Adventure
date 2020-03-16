@@ -18,9 +18,10 @@ def waitForKey(window):
 	char = window.getch()
 	return char
 
-def input(window):
+def txtInput(window):
     curses.echo()
-    txt = window.getch()
+    curses.nocbreak()
+    txt = window.getstr(10, 1)
     return txt
 
 def txtWindowBuild(window):
@@ -51,6 +52,7 @@ def wrap(text):
         
 
 def txtShow(window, text):
+	txtWindowBuild(window)
 	texts = wrap(text)
 	i = 0
 	for string in texts:
@@ -60,6 +62,7 @@ def txtShow(window, text):
 
 
 def charWindow(window):
+	window.refresh()
 	window.addstr(15, winWidth+3, "+" + ("-" * 15) + "+")
 	ln = len(name)
 	window.addstr(16, winWidth+3, "|" + name + (" " * (15-ln)) + "|")
@@ -72,13 +75,14 @@ def charWindow(window):
 
 def main(window):
     txtShow(window, "Hello adventurer! This is a very small adventure, an experiment if you may... you will explore a very simple dungeon and try to retrieve some gold hidden in it!")
-    txtWindowBuild(window)
     txtShow(window, "Would you like to go on an adventure?")
-    txtWindowBuild(window)
     txtShow(window, "Let's begin")
-    txtWindowBuild(window)
     txtShow(window, "What's your name?")
-    name = input(window)
+    inputb = txtInput(window)
+    name = inputb.decode("utf-8")
+    charWindow(window)
+    txtShow(window, "Very nice " + name + "!")
+    txtShow(window, "We may now begin...")
 
 window = curses.initscr()
 curses.halfdelay(5)
