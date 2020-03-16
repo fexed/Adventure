@@ -23,6 +23,12 @@ def clearScreen(window):
     txtWindowBuild(window)
     charWindow(window)
 
+def nameInput(window):
+    curses.echo()
+    curses.nocbreak()
+    txt = window.getstr(16, winWidth+4)
+    return txt
+
 def txtInput(window):
     curses.echo()
     curses.nocbreak()
@@ -81,10 +87,9 @@ def charWindow(window):
 def main(window):
     global name, gold, level
     txtShow(window, "Hello adventurer! This is a very small adventure, an experiment if you may... you will explore a very simple dungeon and try to retrieve some gold hidden in it!")
-    txtShow(window, "Would you like to go on an adventure?")
-    txtShow(window, "Let's begin")
+    txtShow(window, "But first...")
     txtShow(window, "What's your name?")
-    inputb = txtInput(window)
+    inputb = nameInput(window)
     name = inputb.decode("utf-8")
     clearScreen(window)
     txtShow(window, "Very nice " + name + "!")
