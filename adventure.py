@@ -120,9 +120,7 @@ def main(window):
     txtShow(window, "We may now begin...")
     txtShow(window, "") #GAME START
     txtShow(window, "You find yourself at the entrance of a very ancient cript.")
-    doorfile = open("door", "r")
-    doorimg = doorfile.read()
-    drawImage(window, doorimg.split("\n"))
+    drawImage(window, open("door", "r").read().split("\n"))
     txtShow(window, "The wooden door in front of you has an iron handle on the right side, and bears an inscription. You can barely read it, but it says something like...")
     txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
     txtShow(window, "What will you do? [enter/leave]")
