@@ -23,6 +23,8 @@ door = ["",
 
 empty = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
 
+sign = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+
 # CHARACTER
 name = ""
 level = 0
@@ -52,7 +54,7 @@ def nameInput(window):
 def txtInput(window):
     curses.echo()
     curses.nocbreak()
-    txt = window.getstr(14, winWidth+3)
+    txt = window.getstr(22, winWidth+3)
     return txt
 
 def imgWindowBuild(window):
@@ -136,13 +138,21 @@ def main(window):
     name = inputb.decode("utf-8")
     clearScreen(window)
     txtShow(window, "Very nice " + name + "!")
-    txtShow(window, "We may now begin...")    
-    txtShow(window, "")
+    txtShow(window, "We may now begin...")
+    txtShow(window, "") #GAME START
     txtShow(window, "You find yourself at the entrance of a very ancient cript.")
     drawImage(window, door)
     txtShow(window, "The wooden door in front of you has an iron handle on the right side, and bears an inscription. You can barely read it, but it says something like...")
-    # show sign image
     txtShow(window, "\"ABANDON ALL HOPE, YE WHO ENTER HERE\"")
+    txtShow(window, "What will you do? [enter/leave]")
+    inp = txtInput(window)
+    string = inp.decode("utf-8")
+    if string == "leave":
+        txtShow(window, string + " Maybe you're not ready for the adventure after all...")
+    elif string == "enter":
+        txtShow(window, string + " You open the door. It's heavy and the hinges are old and rusty.")
+    else:
+        txtShow(window, string + " Maybe you're not ready for the adventure after all...")
 
 window = curses.initscr()
 curses.halfdelay(5)
